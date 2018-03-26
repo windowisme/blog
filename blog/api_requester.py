@@ -12,21 +12,14 @@ SERVICE_URL = "http://127.0.0.1:5000/"
 
 def post_new(post):
 #    post = api_post_new.data
-        
     print("request post_new(): " + json.dumps(post))
-#    r = requests.post('127.0.0.1:5000/post/new/', data = json.dumps(post))
-    headers = {"Content-Type: application/json"}
     r = requests.post(SERVICE_URL + 'post/new/', json = post)
     print("url: %s, %s" % (r.url, r.text))
-
-    print(r.text.__class__)
     return r.text.rstrip('\n')
 
 def edit_post(post = None, post_hash = ""):
 #    post = api_post_modified.data
     print("request edit_post(): %s" % str(post))
-#    r = requests.put(SERVICE_URL + "post/edit/" + post[Post.POST][Post.HASH] + "/",
-#                      json = post[Post.POST])
     r = requests.put(SERVICE_URL + "post/edit/" + post_hash + "/",
                       json = post[Post.POST])
     print("url: %s, %s" % (r.url, r.text))

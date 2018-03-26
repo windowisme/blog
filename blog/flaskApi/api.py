@@ -88,7 +88,6 @@ class PostApi(Resource):
         return post_hash
     
     def delete(self, post_hash):
-
         print("PostApi.delete(): got a delete request: %s" % post_hash)
         commentTable.delete_many({ Comment.POST_HASH : post_hash })
         result = postTable.delete_one({ Post.HASH : post_hash })
@@ -146,9 +145,6 @@ api.add_resource(CommentApi,
                 '/post/<string:post_hash>/comment/',
                 '/comment/approve/<string:comment_hash>/',
                 '/comment/delete/<string:comment_hash>/')
-
-#parser = reqparse.RequestParser()
-#parser.add_argument('post')
 
 if __name__ == '__main__':
     app.run(debug=True)

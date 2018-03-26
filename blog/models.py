@@ -28,6 +28,7 @@ class Post(models.Model):
             "created_date"   : self.created_date,
             "published_date" : self.published_date
         }
+
 class Comment(models.Model):
     post = models.ForeignKey('blog.Post', related_name='comments', on_delete=models.CASCADE)
     author = models.CharField(max_length=200)
