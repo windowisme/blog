@@ -37,7 +37,8 @@ class PostListApi(Resource):
             print(draft_list)
             return { Post.POSTS : draft_list }
         else:
-            post_list = [ Post(originalPost).as_dict() for originalPost in postTable.find({ Post.PUBLISHED_DATE : { "$ne" : "" } })] 
+            post_list = [ Post(originalPost).as_dict() 
+                          for originalPost in postTable.find({ Post.PUBLISHED_DATE : { "$ne" : "" } })] 
             print(post_list)
             return { Post.POSTS : post_list }
 
