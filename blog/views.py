@@ -23,12 +23,7 @@ def post_detail(request, post_hash):
     print(post_hash)
     post = api_requester.get_post_detail(post_hash)
     print(post)
-#    djpost = get_object_or_404(DjPost, pk=1)
-#    print("DjPost dir: ")
-#    print(dir(djpost))
-#    print(djpost.as_dict())
     return render(request, 'blog/post_detail.html', {"post" : post})
-#    return render(request, 'blog/post_detail.html', post)
 
 @login_required
 def post_new(request):
@@ -37,27 +32,8 @@ def post_new(request):
         form = PostForm(request.POST)
         if form.is_valid():
             pfPost = form.save(commit=False)
-#            print("dir(PostForm): ")
-#            print(dir(pfPost))
-#            print("author object: ")
-#            print(request.user)
-#            print("dir(request.user)")
-#            print(dir(request.user))
-#            print("dir(request.user.get_username())")
-#            print(request.user.get_username())
-#            print(pfPost.title)
-#            print(pfPost.created_date.__class__)
-#            print(dir(pfPost.created_date))
-#            print(pfPost.published_date.__class__)
-#            print(dir(pfPost.published_date))
-#            post.author = request.user
-#            print(post.as_dict())
-##            post.published_date = timezone.now()
-#            post.save()
             post = Post.init_fromForm(pfPost, request.user.get_username())
-#            print(post)
             post_hash = api_requester.post_new({ Post.POST : post.as_dict() })
-            print("post_new(): form object - " + str(form) + ", post object - " + str(post.as_dict()))
             return redirect('post_detail', post_hash=post_hash)
     else:
         form = PostForm()
@@ -81,10 +57,6 @@ def post_edit(request, post_hash):
             return redirect('post_detail', post_hash = post[Post.HASH])
     else:
         print("go rendering edit page.")
-#        print(dir(PostForm))
-#        print(PostForm.save.__doc__)
-#        print(dir(PostForm.Meta))
-#        print(PostForm.Meta.__doc__)
         form = PostForm(instance=djPost)
     return render(request, 'blog/post_edit.html', {'form':form})
 

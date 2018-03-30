@@ -11,14 +11,12 @@ from blog.predata import api_comment_new
 SERVICE_URL = "http://127.0.0.1:5000/"
 
 def post_new(post):
-#    post = api_post_new.data
     print("request post_new(): " + json.dumps(post))
     r = requests.post(SERVICE_URL + 'post/new/', json = post)
     print("url: %s, %s" % (r.url, r.text))
     return r.text.rstrip('\n')
 
 def edit_post(post = None, post_hash = ""):
-#    post = api_post_modified.data
     print("request edit_post(): %s" % str(post))
     r = requests.put(SERVICE_URL + "post/edit/" + post_hash + "/",
                       json = post[Post.POST])
@@ -62,7 +60,6 @@ def get_comment_post_hash(comment_hash):
 
 
 def add_comment(comment = None, post_hash = ""):
-#    comment = api_comment_new.data
     comment[Comment.COMMENT][Comment.POST_HASH] = post_hash        
     print("add_comment(): " + json.dumps(comment))
     r = requests.post(SERVICE_URL + ("post/%s/comment/" % post_hash), json = comment)

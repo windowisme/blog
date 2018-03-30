@@ -32,22 +32,14 @@ class PostListApi(Resource):
 
         print("PostListApi.get()")
         if PostApiCommand.DRAFTS in request.path:
-            draft_list = [ Post(draft).as_dict() for draft in postTable.find({Post.PUBLISHED_DATE : ""}).sort(Post.CREATED_DATE, 1)]
+            draft_list = [ Post(draft).as_dict() 
+                           for draft in postTable.find({Post.PUBLISHED_DATE : ""})]
             print(draft_list)
             return { Post.POSTS : draft_list }
         else:
-#        print(dir(request))
-#        print("base_url: " + request.base_url)
-#        print("full_path: " + request.full_path)
-#        print("url: " + request.url)
-#        print("host_url: " + request.host_url)
-#        print("path: " + request.path)
-#        print("args: " + str(request.args))
-#        print(postTable.find())
             post_list = [ Post(originalPost).as_dict() for originalPost in postTable.find({ Post.PUBLISHED_DATE : { "$ne" : "" } })] 
             print(post_list)
             return { Post.POSTS : post_list }
-#        return None
 
 class PostApi(Resource):
 
@@ -60,7 +52,8 @@ class PostApi(Resource):
         print("PostApi.get(): %s", post_hash)
         originalPost = postTable.find({ Post.HASH : post_hash })[0]
         post = Post(originalPost).as_dict()
-        commend_list = [ Comment(originalComment).as_dict() for originalComment in commentTable.find({ Comment.POST_HASH : post[Post.HASH] })]
+        commend_list = [ Comment(originalComment).as_dict() 
+                         for originalComment in commentTable.find({ Comment.POST_HASH : post[Post.HASH] })]
         post[Comment.COMMENTS] = commend_list
         print(post)
         return post
