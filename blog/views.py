@@ -1,17 +1,19 @@
 import json
+
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
 from django.shortcuts import render, get_object_or_404
 from django.shortcuts import redirect 
 from django.utils import timezone
+from blog.flaskApi.Post import Post
+from blog.flaskApi.Comment import Comment
+from django.urls import reverse
+from django.views.decorators.cache import never_cache    
+
 from .forms import PostForm, CommentForm
 from .models import Post as DjPost 
 from .models import Comment as DjComment
-from blog.flaskApi.Post import Post
-from blog.flaskApi.Comment import Comment
 from . import requester
-from django.urls import reverse
-from django.views.decorators.cache import never_cache    
 
 def post_list(request):
     posts = requester.get_post_list()

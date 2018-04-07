@@ -1,12 +1,15 @@
-import json
+
 import sys
-import requests
+import json
+
 from datetime import datetime
 from blog.flaskApi.Post import Post
 from blog.flaskApi.Comment import Comment
 from blog.predata import api_post_new
 from blog.predata import api_post_modified
 from blog.predata import api_comment_new
+
+import requests
 
 SERVICE_URL = "http://127.0.0.1:5000/"
 

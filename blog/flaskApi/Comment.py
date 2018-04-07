@@ -1,5 +1,4 @@
 
-
 class Comment:
     
     ID           = "_id"

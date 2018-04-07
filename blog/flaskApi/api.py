@@ -2,10 +2,9 @@ from flask import Flask, request
 from flask_restful import Resource, Api, reqparse
 from flask_pymongo import PyMongo
 from pymongo import MongoClient
+
 from Post import Post
 from Comment import Comment
-
-
 
 class PostApiCommand():
     EDIT = "edit"
