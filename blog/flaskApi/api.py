@@ -56,7 +56,7 @@ class PostApi(Resource):
         print(post)
         return post
 
-def put(self, post_hash, command):
+    def put(self, post_hash, command):
         print("PostApi.put(): %s %s" % (command, post_hash))
         
         if command == PostApiCommand.EDIT:
@@ -123,18 +123,6 @@ class CommentApi(Resource):
         print(result.deleted_count)
 
 
-api.add_resource(PostListApi, '/', '/drafts/')
-api.add_resource(PostApi, 
-                '/post/<string:post_hash>/', 
-                '/post/new/',
-                '/post/<string:command>/<string:post_hash>/',
-                '/post/remove/<string:post_hash>/')
-
-api.add_resource(CommentApi,
-                '/comment/<string:comment_hash>/', 
-                '/post/<string:post_hash>/comment/',
-                '/comment/approve/<string:comment_hash>/',
-                '/comment/delete/<string:comment_hash>/')
 
 if __name__ == '__main__':
 
@@ -146,4 +134,16 @@ if __name__ == '__main__':
     db = dbClient.blogDb
     postTable = db.post
     commentTable = db.comment
+    api.add_resource(PostListApi, '/', '/drafts/')
+    api.add_resource(PostApi, 
+                    '/post/<string:post_hash>/', 
+                    '/post/new/',
+                    '/post/<string:command>/<string:post_hash>/',
+                    '/post/remove/<string:post_hash>/')
+
+    api.add_resource(CommentApi,
+                    '/comment/<string:comment_hash>/', 
+                    '/post/<string:post_hash>/comment/',
+                    '/comment/approve/<string:comment_hash>/',
+                    '/comment/delete/<string:comment_hash>/')
     app.run(debug=True)

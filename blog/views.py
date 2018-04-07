@@ -32,10 +32,8 @@ def post_new(request):
         form = PostForm(request.POST)
         if form.is_valid():
             pfPost = form.save(commit=False)
-            post = Post.init_fromForm(pfPost, 
-                                      request.user.get_username())
-            post_hash = requester
-                        .post_new({Post.POST:post.as_dict()})
+            post = Post.init_fromForm(pfPost, request.user.get_username())
+            post_hash = requester.post_new({Post.POST:post.as_dict()})
             return redirect('post_detail', post_hash=post_hash)
     else:
         form = PostForm()
