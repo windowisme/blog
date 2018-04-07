@@ -26,19 +26,19 @@ class Comment:
     @classmethod
     def init_fromForm(cls, commentForm, username, post_hash):
         print("init Comment object from CommentForm")
-        return cls({ cls.AUTHOR         : username,
-                     cls.CONTENT        : commentForm.text,
-                     cls.CREATED_DATE   : str(commentForm.created_date.now()),
-                     cls.IS_APPROVED    : False,
-                     cls.HASH           : "",
-                     cls.POST_HASH      : post_hash})
+        return cls({cls.AUTHOR         : username,
+                    cls.CONTENT        : commentForm.text,
+                    cls.CREATED_DATE   : str(commentForm.created_date.now()),
+                    cls.IS_APPROVED    : False,
+                    cls.HASH           : "",
+                    cls.POST_HASH      : post_hash})
 
 
     def as_dict(self):
-        return { self.AUTHOR       : self.author,
-                 self.CONTENT      : self.content,
-                 self.CREATED_DATE : self.created_date,
-                 self.IS_APPROVED  : self.is_approved,
-                 self.HASH         : self.hash,
-                 self.POST_HASH    : self.post_hash }
+        return {self.AUTHOR       : self.author,
+                self.CONTENT      : self.content,
+                self.CREATED_DATE : self.created_date,
+                self.IS_APPROVED  : self.is_approved,
+                self.HASH         : self.hash,
+                self.POST_HASH    : self.post_hash}
         

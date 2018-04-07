@@ -19,13 +19,15 @@ def post_new(post):
 def edit_post(post = None, post_hash = ""):
     print("request edit_post(): %s" % str(post))
     r = requests.put(SERVICE_URL + "post/edit/" + post_hash + "/",
-                      json = post[Post.POST])
+                     json = post[Post.POST])
     print("url: %s, %s" % (r.url, r.text))
 
 def publish_post(post_hash):
-    print("request publish_post: " + SERVICE_URL + ("post/publish/%s/" % post_hash))
+    print("request publish_post: " 
+            + SERVICE_URL 
+            + ("post/publish/%s/" % post_hash))
     r = requests.put(SERVICE_URL + ("post/publish/%s/" % post_hash), 
-                     json = {Post.PUBLISHED_DATE : str(datetime.now())})
+                     json = {Post.PUBLISHED_DATE:str(datetime.now())})
 
 def get_post_list():
     print("request get_post_list")
@@ -49,7 +51,9 @@ def get_post_detail(post_hash):
     return aPost
 
 def remove_post(post_hash):
-    print("request remove: " + SERVICE_URL + ("post/remove/%s/" % post_hash))
+    print("request remove: " 
+          + SERVICE_URL 
+          + ("post/remove/%s/" % post_hash))
     r = requests.delete(SERVICE_URL + ("post/remove/%s/" % post_hash))
 
 def get_comment_post_hash(comment_hash):
@@ -62,17 +66,22 @@ def get_comment_post_hash(comment_hash):
 def add_comment(comment = None, post_hash = ""):
     comment[Comment.COMMENT][Comment.POST_HASH] = post_hash        
     print("add_comment(): " + json.dumps(comment))
-    r = requests.post(SERVICE_URL + ("post/%s/comment/" % post_hash), json = comment)
+    r = requests.post(SERVICE_URL 
+        + ("post/%s/comment/" % post_hash), json = comment)
     print("url: %s, %s" % (r.url, r.text))
 
 def approve_comment(comment_hash):
     print("approve_comment(): %s" % comment_hash)
-    r = requests.put(SERVICE_URL + 'comment/approve/%s/' % comment_hash)
+    r = requests.put(SERVICE_URL 
+                     + ('comment/approve/%s/' % comment_hash))
     print("url: %s, %s" % (r.url, r.text))
 
 def delete_comment(comment_hash):
-    print("request delete comment: " + SERVICE_URL + ("comment/delete/%s/" % comment_hash))
-    r = requests.delete(SERVICE_URL + ("comment/delete/%s/" % comment_hash))
+    print("request delete comment: " 
+          + SERVICE_URL 
+          + ("comment/delete/%s/" % comment_hash))
+    r = requests.delete(SERVICE_URL 
+                        + ("comment/delete/%s/" % comment_hash))
 
 if __name__ == '__main__':
     from flaskApi.Post import Post
